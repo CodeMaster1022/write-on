@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+ * One palette for the whole product — the fix for the MVP's per-screen colours.
+ * Every screen pulls from these tokens; nothing invents its own.
+ */
+@theme {
+  --color-ink: #221d2e;
+  --color-ink-soft: #5b5568;
+  --color-ink-faint: #7d7689;
+
+  --color-paper: #fbf6ec;
+  --color-paper-edge: #ede3d4;
+
+  --color-indigo: #5b4e8c;
+  --color-indigo-deep: #3e3462;
+  --color-indigo-wash: #efe9f8;
+  --color-indigo-tint: #f4eefb;
+  --color-indigo-night: #2a2340;
+
+  --color-coral: #ff7a5c;
+  --color-coral-deep: #e85f42;
+  --color-coral-wash: #ffede7;
+
+  --color-teal: #2fb6a3;
+  --color-teal-deep: #1c7a6c;
+  --color-teal-wash: #e4f5f1;
+
+  --color-sun: #f2a13b;
+  --color-sun-wash: #fff6dc;
+
+  --font-display: var(--font-baloo), "Segoe UI", sans-serif;
+  --font-body: var(--font-nunito), "Segoe UI", sans-serif;
+
+  --radius-card: 22px;
+  --radius-panel: 28px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible focus everywhere — these screens are used on shared classroom devices. */
+  :focus-visible {
+    outline: 3px solid var(--color-indigo);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .lift {
+    transition: transform 140ms ease, box-shadow 140ms ease;
+  }
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgb(62 52 98 / 0.16);
+  }
+
+  /* Landing-only storybook helpers */
+  .lined-paper {
+    background-color: #fffdf8;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      var(--color-paper-edge) 27px,
+      var(--color-paper-edge) 28px
+    );
+  }
+
+  .bulletin-board {
+    background-color: #f3ead8;
+    background-image: radial-gradient(circle at 18px 18px, rgb(62 52 98 / 0.07) 1.4px, transparent 1.8px);
+    background-size: 36px 36px;
+  }
+
+  .sticker {
+    box-shadow: 1px 3px 0 rgb(62 52 98 / 0.1);
+  }
+}
