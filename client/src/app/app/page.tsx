@@ -66,7 +66,9 @@ export default function AppHome() {
   const { user } = useAuth();
   if (!user) return null;
 
-  const firstName = user.displayName.split(" ")[0];
+  const parts = user.displayName.trim().split(/\s+/);
+  const greetName =
+    parts.length > 1 && /^\S{1,4}\.$/.test(parts[0]) ? parts.slice(0, 2).join(" ") : parts[0];
 
   return (
     <div className="mx-auto max-w-[1080px] px-5 py-10 flex flex-col gap-10">
@@ -79,7 +81,7 @@ export default function AppHome() {
         </div>
         <div className="flex flex-col gap-2 text-center sm:text-left">
           <h1 className="text-3xl sm:text-4xl font-bold">
-            Hi {firstName}! What are we{" "}
+            Hi {greetName}! What are we{" "}
             <span className="relative inline-block text-coral">
               writing
               <svg

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Inki, ItemPreview } from "@/components/Inki";
 import { SLOT_LABELS } from "@/components/inki-items";
-import { Banner, Button, InkDrops } from "@/components/ui";
+import { Banner, Button, ButtonLink, InkDrops } from "@/components/ui";
 import { ApiError, api } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
 import type { EquipSlot, RewardItem } from "@/lib/types";
@@ -89,6 +89,27 @@ export default function ClosetPage() {
 
       {items === null && !error ? (
         <p className="text-ink-soft font-semibold">Opening the closet…</p>
+      ) : null}
+
+      {items && items.length === 0 ? (
+        <div className="relative lined-paper rounded-[28px] border border-paper-edge p-10 flex flex-col items-center gap-4 text-center mt-2">
+          <span
+            aria-hidden="true"
+            className="absolute -top-3 left-1/2 h-5 w-[4.25rem] -translate-x-1/2 rotate-[-6deg] rounded-[2px] bg-sun-wash"
+          />
+          <div className="relative flex items-center justify-center w-[170px] h-[170px]">
+            <div aria-hidden="true" className="absolute inset-4 rounded-full bg-indigo-wash" />
+            <div className="relative">
+              <Inki size={140} equipped={user.equipped} mood="think" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold">The closet is still empty</h2>
+          <p className="text-ink-soft max-w-[420px]">
+            Earn ink drops by finishing a piece of writing, then come back to pick out a new look for
+            Inki.
+          </p>
+          <ButtonLink href="/app">Start writing</ButtonLink>
+        </div>
       ) : null}
 
       {items

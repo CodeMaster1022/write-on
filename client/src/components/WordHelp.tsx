@@ -95,7 +95,7 @@ export function WordHelp({
       </button>
 
       {open ? (
-        <div className={`rounded-xl p-5 flex flex-col gap-4 ${theme.wash}`}>
+        <div className={`relative rounded-2xl p-5 flex flex-col gap-4 ${theme.wash}`}>
           <p className="leading-relaxed text-ink">{POS_EXPLAINER[partOfSpeech]}</p>
 
           {error ? <p className="font-semibold text-coral-deep">{error}</p> : null}
@@ -109,13 +109,13 @@ export function WordHelp({
               <p className="text-[13px] font-bold uppercase tracking-[0.06em] text-ink-faint">
                 Tap one to use it
               </p>
-              <ul className="flex flex-col gap-2">
+              <ul className="grid gap-2 sm:grid-cols-2">
                 {words.map((w) => (
                   <li key={w._id}>
                     <button
                       type="button"
                       onClick={() => onPick(w.word)}
-                      className="w-full text-left bg-white/80 hover:bg-white rounded-lg px-4 py-3 min-h-[44px] flex flex-col gap-0.5 transition-colors"
+                      className="sticker w-full text-left bg-white hover:bg-paper rounded-xl px-4 py-3 min-h-[44px] flex flex-col gap-0.5 transition-colors"
                     >
                       <span className="font-bold text-ink">{w.word}</span>
                       {w.meaning ? <span className="text-[14px] text-ink-soft">{w.meaning}</span> : null}

@@ -68,16 +68,30 @@ export default function AccountPage() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">{user.displayName}</h1>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h1 className="text-3xl font-bold">{user.displayName}</h1>
+            <span
+              className={`px-3 py-1 rounded-full text-[13px] font-bold ${
+                user.isGuest
+                  ? "bg-sun-wash text-[#8A6410]"
+                  : user.role === "teacher"
+                    ? "bg-indigo-wash text-indigo-deep"
+                    : "bg-teal-wash text-teal-deep"
+              }`}
+            >
+              {user.isGuest ? "Guest writer" : user.role === "teacher" ? "Teacher" : "Student"}
+            </span>
+          </div>
           <div className="flex flex-wrap items-center gap-3">
             <InkDrops count={user.inkDrops} />
             <span className="text-[15px] font-semibold text-ink-soft">
               {user.writingCount} {user.writingCount === 1 ? "piece" : "pieces"} of writing
             </span>
           </div>
-          <p className="text-[15px] text-ink-faint capitalize">
-            {user.isGuest ? "Guest writer" : `${user.role} account`}
-          </p>
+          {user.email ? <p className="text-[15px] text-ink-soft">{user.email}</p> : null}
+          {user.gradeLevel ? (
+            <p className="text-[15px] text-ink-faint">{user.gradeLevel}</p>
+          ) : null}
         </div>
       </header>
 
@@ -152,6 +166,7 @@ export default function AccountPage() {
             />
           </Field>
 
+          {user.role !== "teacher" ? (
           <Field label="Grade" hint="Optional." htmlFor="gradeLevel">
             <input
               id="gradeLevel"
@@ -162,6 +177,7 @@ export default function AccountPage() {
               placeholder="3rd"
             />
           </Field>
+          ) : null}
 
           <Field
             label="Class code"

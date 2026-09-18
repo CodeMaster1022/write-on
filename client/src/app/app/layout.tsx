@@ -92,7 +92,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </Link>
 
           <nav className="flex-1 flex items-center justify-center gap-1 sm:gap-2">
-            {NAV.map((item) => {
+            {(user.role === "teacher"
+              ? [{ href: "/teacher", label: "My class" }, ...NAV]
+              : NAV
+            ).map((item) => {
               const active = pathname === item.href;
               return (
                 <Link
